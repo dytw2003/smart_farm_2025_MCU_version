@@ -549,10 +549,10 @@ async def sw_cw_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl_run_t
             # gpio.turn_off_pins(o_pin)
             # gpio.turn_off_pins(cl_pin)
 
-            setattr(var, o_flg_n, False)
-            setattr(var, cl_flg_n, False)
-            setattr(var, indi, None)
-            setattr(var, indi_stat, 0)
+            # setattr(var, o_flg_n, False)
+            # setattr(var, cl_flg_n, False)
+            # setattr(var, indi, None)
+            # setattr(var, indi_stat, 0)
     elif hw_slt_swtch == "mn":
         print(f"[DEBUG] Manual mode active: {hw_slt_swtch}")
         await mn_signal(gpio, var)
@@ -656,6 +656,8 @@ async def tc_sun_temp_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl
                 setattr(var, cl_flg_n, False)
                 setattr(var, indi, None)
                 setattr(var, indi_stat, 0)
+                setattr(var,o_run_time_n,0)
+                setattr(var,cl_run_time_n,0)
             else:
                 print(f"[DEBUG]--CURRENT ACTUATOR PIN : {pin_btn}")
                 print(f"[DEBUG]--CURRENT  at flag: {at_flg}")
@@ -665,10 +667,10 @@ async def tc_sun_temp_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl
             # gpio.turn_off_pins(o_pin)
             # gpio.turn_off_pins(cl_pin)
 
-            setattr(var, o_flg_n, False)
-            setattr(var, cl_flg_n, False)
-            setattr(var, indi, None)
-            setattr(var, indi_stat, 0)
+            # setattr(var, o_flg_n, False)
+            # setattr(var, cl_flg_n, False)
+            # setattr(var, indi, None)
+            # setattr(var, indi_stat, 0)
     elif hw_slt_swtch == "mn":
         print(f"[DEBUG] Manual mode active: {hw_slt_swtch}")
         await mn_signal(gpio, var)
@@ -780,6 +782,8 @@ async def tc_vt_wind_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl_
                 setattr(var, cl_flg_n, False)
                 setattr(var, indi, None)
                 setattr(var, indi_stat, 0)
+                setattr(var, o_run_time_n, 0)
+                setattr(var, cl_run_time_n, 0)
             else:
                 print(f"[DEBUG]--CURRENT ACTUATOR PIN : {pin_btn}")
                 print(f"[DEBUG]--CURRENT  at flag: {at_flg}")
@@ -789,10 +793,10 @@ async def tc_vt_wind_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl_
             # gpio.turn_off_pins(o_pin)
             # gpio.turn_off_pins(cl_pin)
 
-            setattr(var, o_flg_n, False)
-            setattr(var, cl_flg_n, False)
-            setattr(var, indi, None)
-            setattr(var, indi_stat, 0)
+            # setattr(var, o_flg_n, False)
+            # setattr(var, cl_flg_n, False)
+            # setattr(var, indi, None)
+            # setattr(var, indi_stat, 0)
     elif hw_slt_swtch == "mn":
         print(f"[DEBUG] Manual mode active: {hw_slt_swtch}")
         await mn_signal(gpio, var)
