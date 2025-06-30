@@ -48,8 +48,8 @@ async def envout_sensor(var, client):    # Topics
 
 async def sensor(var, client):
     # Topics
-    MQTT_TOPIC_SENSOR = "jbsy24_1/sensor"
-    MQTT_TOPIC_HW_INFO = "jbsy24_1/info"
+    MQTT_TOPIC_SENSOR = "dytw_1/sensor"
+    MQTT_TOPIC_HW_INFO = "dytw_1/info"
     if not var.psv_sen_flg:
         var.psv_sen_flg = True
         degree =get_wind_direction(var.envout_wd_1)      
@@ -104,8 +104,8 @@ async def sensor(var, client):
 
 
 async def auto_publish(on_condition, manuaL_data, auto_data, client):
-    MQTT_TOPIC_AUTO = "jbsy24_1/auto"
-    MQTT_TOPIC_MANUAL = "jbsy24_1/manual"
+    MQTT_TOPIC_AUTO = "dytw_1/auto"
+    MQTT_TOPIC_MANUAL = "dytw_1/manual"
 
     if on_condition == "on" or on_condition == "ON":
         try:

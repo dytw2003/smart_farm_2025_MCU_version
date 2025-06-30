@@ -6,12 +6,12 @@ import json
 
 # change for the other house
 # _1
-# jbsy24
+# dytw
 
-# jbsy24
+# dytw
 def device_status_motor(name, indi, indi_stat,condition):
     status = {
-        "db_name": "jbsy24",
+        "db_name": "dytw",
         "device_name": name,
         "device_status": indi,
         "device_status_percent": indi_stat,
@@ -21,7 +21,7 @@ def device_status_motor(name, indi, indi_stat,condition):
 
 def device_status_ac(name, indi,condition):
     status = {
-        "db_name": "jbsy24",
+        "db_name": "dytw",
         "device_name": name,
         "device_status": indi,
         "condition":condition,
@@ -103,7 +103,7 @@ async def publish_sensor_to_server_db(var):
 
     
         
-            API_URL = "http://www.adas.today/sf/backend/gateway_sensor_post_api/jbsy24_sensor_post.php"
+            API_URL = "http://www.adas.today/sf/backend/gateway_sensor_post_api/dytw_sensor_post.php"
             async with aiohttp.ClientSession() as session:
                 async with session.post(API_URL, json=sensor_data) as response:
                     if response.status == 200:
@@ -119,7 +119,7 @@ async def publish_sensor_to_server_db(var):
 async def send_settings_to_server_db(data):   
 
     try:
-        api_url = "http://www.adas.today/sf/backend/gateway_post_api/jbsy24_post.php"
+        api_url = "http://www.adas.today/sf/backend/gateway_post_api/dytw_post.php"
 
         async with aiohttp.ClientSession() as session:
             async with session.post(api_url, json=data) as response:
@@ -134,7 +134,7 @@ async def send_settings_to_server_db(data):
 async def send_status_to_server_db(data):   
 
     try:
-        api_url = "http://www.adas.today/sf/backend/gateway_post_api/jbsy24_status_post_t.php"
+        api_url = "http://www.adas.today/sf/backend/gateway_post_api/dytw_status_post_t.php"
 
         async with aiohttp.ClientSession() as session:
             async with session.post(api_url, json=data) as response:

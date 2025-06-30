@@ -178,8 +178,8 @@ async def setup_cloud_mqtt():
     global cloud_client
     MQTT_BROKER = "121.78.116.56"
     MQTT_PORT = 1883
-    MQTT_TOPIC_SUBSCRIBE = b"jbsy24"  # ----------- change the topic ID
-    MQTT_CLIENT_ID = "mqtt_ch1_jbsy24_web1"
+    MQTT_TOPIC_SUBSCRIBE = b"dytw"  # ----------- change the topic ID
+    MQTT_CLIENT_ID = "mqtt_ch1_dytw_web1"
 
     cloud_client = MQTTClient(MQTT_CLIENT_ID, MQTT_BROKER, port=MQTT_PORT)
     try:

@@ -277,9 +277,14 @@ async def rain_func(env_in_temp,  rain_max, rain_btn, var, gpio, o_pin, cl_pin, 
     # if rain_btn == "on" :
     # print(f"Rain Based Control [Rain:{rain_btn}]")
     if rain_max > 0 and int(env_in_temp) > int(rain_max):
+        setattr(var, o_flg_n, False)
+        setattr(var, cl_flg_n, True)
         print("Raining but -- {Max Temperature is reached}")
+        
         await ctrl_open_stp(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, o_run_time_n, cl_run_time_n, o_flag, o_flg_n, cl_flg_n, step, scan, indi, indi_stat, condition)
     else:
+        setattr(var, o_flg_n, True)
+        setattr(var, cl_flg_n, False)
         await ctrl_close_full(var, gpio, o_pin, cl_pin, mtr_time, cl_flag,  o_flg_n, cl_flg_n, o_run_time_n, cl_run_time_n, indi, indi_stat, condition)
         print("Rain detected {Max temp NOT set}")
     # else:
@@ -309,6 +314,8 @@ async def wind_func(wind,  wind_thresh,  var, gpio, o_pin, cl_pin, mtr_time, o_r
 
 async def sw_cw_rn_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl_run_time, o_run_time_n, cl_run_time_n, step, scan, temp_thresh,  env_in_temp, rain_max, rain, wind_max, wind, c_hour, c_min, o_hour, o_min, cl_hour, cl_min, at_btn, rain_btn, pin_btn, cl_flag, o_flag, cl_flg_n, o_flg_n, at_flg, at_flg_n,  indi, indi_stat,  hw_slt_swtch):
     # (o_hour, o_min,) (cl_hour, cl_min),(c_hour, c_min)
+
+    
     o_time = (o_hour, o_min)
     cl_time = (cl_hour, cl_min)
     c_time = (c_hour, c_min)
@@ -344,8 +351,8 @@ async def sw_cw_rn_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl_ru
                 print(f" WEB PIN ------------ON {pin_btn}")
                 setattr(var, at_flg_n, True)
                 if int(rain) == 1:
-                    setattr(var, o_flg_n, True)
-                    setattr(var, cl_flg_n, False)
+                    # setattr(var, o_flg_n, True)
+                    # setattr(var, cl_flg_n, False)
                     print(f"Rain Based Control [Rain:{rain}]")
                     await rain_func(env_in_temp,  rain_max, rain_btn, var, gpio, o_pin, cl_pin, mtr_time, o_run_time,  o_run_time_n, cl_run_time_n, o_flag, cl_flag, o_flg_n, cl_flg_n, step, scan, indi, indi_stat)
                 elif wind != 0 and int(wind_max) > 0 and int(wind) > int(wind_max):
@@ -418,6 +425,8 @@ async def sw_cw_rn_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl_ru
                 setattr(var, cl_flg_n, False)
                 setattr(var, indi, None)
                 setattr(var, indi_stat, 0)
+                setattr(var, o_run_time_n, 0)
+                setattr(var, cl_run_time_n, 0)
             else:
                 print(f"[DEBUG]--CURRENT ACTUATOR PIN : {pin_btn}")
                 print(f"[DEBUG]--CURRENT  at flag: {at_flg}")
@@ -425,13 +434,14 @@ async def sw_cw_rn_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl_ru
         elif at_btn == "off" or at_btn == "OFF":
 
             print(f"[DEBUG] Web Auto mode OFF: {at_btn}")
-            gpio.turn_off_pins(o_pin)
-            gpio.turn_off_pins(cl_pin)
+            # gpio.turn_off_pins(o_pin)
+            # gpio.turn_off_pins(cl_pin)
 
             setattr(var, o_flg_n, False)
             setattr(var, cl_flg_n, False)
             setattr(var, indi, None)
-            setattr(var, indi_stat, 0)
+            # setattr(var, indi_stat, 0)
+           
     elif hw_slt_swtch == "mn":
         print(f"[DEBUG] Manual mode active: {hw_slt_swtch}")
         await mn_signal(gpio, var)
@@ -439,6 +449,7 @@ async def sw_cw_rn_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl_ru
 
 async def sw_cw_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl_run_time, o_run_time_n, cl_run_time_n, step, scan, temp_thresh,  env_in_temp, c_hour, c_min, o_hour, o_min, cl_hour, cl_min, at_btn, pin_btn, cl_flag, o_flag, cl_flg_n, o_flg_n, at_flg, at_flg_n, indi, indi_stat,  hw_slt_swtch):
     ''' Control function for switch and curtain motor with time and temperature based logic. '''
+
 
     open_time = False
     close_time = False
@@ -527,6 +538,8 @@ async def sw_cw_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl_run_t
                 setattr(var, cl_flg_n, False)
                 setattr(var, indi, None)
                 setattr(var, indi_stat, 0)
+                setattr(var, o_run_time_n, 0)
+                setattr(var, cl_run_time_n, 0)
             else:
                 print(f"[DEBUG]--CURRENT ACTUATOR PIN : {pin_btn}")
                 print(f"[DEBUG]--CURRENT  at flag: {at_flg}")
@@ -547,6 +560,7 @@ async def sw_cw_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl_run_t
 
 async def tc_sun_temp_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl_run_time, o_run_time_n, cl_run_time_n, step, scan,  env_in_temp, low_temp_thresh,  sun_light, sun_light_thresh, sun_data_btn,  c_hour, c_min, o_hour, o_min, cl_hour, cl_min, at_btn, pin_btn, cl_flag, o_flag, cl_flg_n, o_flg_n, at_flg, at_flg_n, indi, indi_stat,  hw_slt_swtch):
     ''' Control function for low temperature and sunlight based control of a motorized curtain system. '''
+
 
     open_time = False
     close_time = False
@@ -666,6 +680,9 @@ async def tc_sun_temp_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl
 
 
 async def tc_vt_wind_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl_run_time, o_run_time_n, cl_run_time_n, step, scan,  env_in_temp, low_temp_thresh, wind, wind_thresh, c_hour, c_min, o_hour, o_min, cl_hour, cl_min, at_btn, pin_btn, cl_flag, o_flag, cl_flg_n, o_flg_n, at_flg, at_flg_n, indi, indi_stat,  hw_slt_swtch):
+    
+    low_temp_thresh
+    
     open_time = False
     close_time = False
     o_time = (o_hour, o_min)

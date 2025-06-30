@@ -25,8 +25,8 @@ update_buffer = []
 async def store_var(var, name, state, client,  filename='var.csv'):
     """Store variable and queue updates for asynchronous CSV file storage."""
 
-    MQTT_TOPIC_MANUAL = b"jbsy24_1/manual"
-    # MQTT_TOPIC_AUTO = b"jbsy24_1/auto"
+    MQTT_TOPIC_MANUAL = b"dytw_1/manual"
+    # MQTT_TOPIC_AUTO = b"dytw_1/auto"
 
     # Check if state is empty and handle it
     if not state:
