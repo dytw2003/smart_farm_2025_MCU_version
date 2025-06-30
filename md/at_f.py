@@ -437,9 +437,9 @@ async def sw_cw_rn_control(var, gpio, o_pin, cl_pin, mtr_time, o_run_time, cl_ru
             # gpio.turn_off_pins(o_pin)
             # gpio.turn_off_pins(cl_pin)
 
-            setattr(var, o_flg_n, False)
-            setattr(var, cl_flg_n, False)
-            setattr(var, indi, None)
+            # setattr(var, o_flg_n, False)
+            # setattr(var, cl_flg_n, False)
+            # setattr(var, indi, None)
             # setattr(var, indi_stat, 0)
            
     elif hw_slt_swtch == "mn":
